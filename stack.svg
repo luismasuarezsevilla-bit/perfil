@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 150" width="790" height="150">
+  <style>
+    text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 700; text-anchor: middle; }
+    .p { animation: float 2.4s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+  </style>
+
+  <!-- Fila 1 -->
+  <g class="p" style="animation-delay:0s">
+    <rect x="25" y="25" width="135" height="42" rx="21" fill="#F7DF1E"/>
+    <text x="92" y="52" fill="#000">JavaScript</text>
+  </g>
+  <g class="p" style="animation-delay:0.2s">
+    <rect x="177" y="25" width="135" height="42" rx="21" fill="#339933"/>
+    <text x="244" y="52" fill="#fff">Node.js</text>
+  </g>
+  <g class="p" style="animation-delay:0.4s">
+    <rect x="329" y="25" width="135" height="42" rx="21" fill="#E0234E"/>
+    <text x="396" y="52" fill="#fff">NestJS</text>
+  </g>
+  <g class="p" style="animation-delay:0.6s">
+    <rect x="481" y="25" width="135" height="42" rx="21" fill="#3776AB"/>
+    <text x="548" y="52" fill="#fff">Python</text>
+  </g>
+  <g class="p" style="animation-delay:0.8s">
+    <rect x="633" y="25" width="135" height="42" rx="21" fill="#4479A1"/>
+    <text x="700" y="52" fill="#fff">SQL</text>
+  </g>
+
+  <!-- Fila 2 -->
+  <g class="p" style="animation-delay:1s">
+    <rect x="25" y="85" width="135" height="42" rx="21" fill="#E25A1C"/>
+    <text x="92" y="112" fill="#fff">PySpark</text>
+  </g>
+  <g class="p" style="animation-delay:1.2s">
+    <rect x="177" y="85" width="135" height="42" rx="21" fill="#E34F26"/>
+    <text x="244" y="112" fill="#fff">HTML5</text>
+  </g>
+  <g class="p" style="animation-delay:1.4s">
+    <rect x="329" y="85" width="135" height="42" rx="21" fill="#1572B6"/>
+    <text x="396" y="112" fill="#fff">CSS3</text>
+  </g>
+  <g class="p" style="animation-delay:1.6s">
+    <rect x="481" y="85" width="135" height="42" rx="21" fill="#F05032"/>
+    <text x="548" y="112" fill="#fff">Git</text>
+  </g>
+  <g class="p" style="animation-delay:1.8s">
+    <rect x="633" y="85" width="135" height="42" rx="21" fill="#181717"/>
+    <text x="700" y="112" fill="#fff">GitHub</text>
+  </g>
+</svg>
