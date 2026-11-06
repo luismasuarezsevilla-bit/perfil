@@ -18,6 +18,21 @@ Me apasiona escribir código limpio, probar lo que construyo, el análisis de da
 ## Proyectos destacados
 - **[riwi-qa-spark](https://github.com/tuusuario/riwi-qa-spark)**: pipeline de validación de transacciones con PySpark.
 
+## 💻 Stats
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=18&pause=1000&color=00FF41&center=true&vCenter=true&width=520&lines=%24+whoami;luis-mario-suarez;%24+cat+stats.log;%24+access+granted+..." alt="terminal" />
+</p>
+
+<p align="center">
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=tuusuario&show_icons=true&hide_border=false&bg_color=000000&title_color=00FF41&text_color=00FF41&icon_color=00FF41&border_color=00FF41&ring_color=00FF41&title_prefix=%3E_%20" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tuusuario&layout=compact&hide_border=false&bg_color=000000&title_color=00FF41&text_color=00FF41&border_color=00FF41" />
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com/?user=tuusuario&background=000000&border=00FF41&stroke=00FF41&ring=00FF41&fire=00FF41&currStreakNum=00FF41&sideNums=00FF41&currStreakLabel=00FF41&sideLabels=00FF41&dates=00B32C" />
+</p>
+
 ## Contacto
 <p align="center">
   <a href="https://www.linkedin.com/in/luis-mario-suarez-devl">
