@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 24" width="800" height="24">
+  <style>
+    .run { stroke-dasharray: 120 680; animation: run 3s linear infinite; }
+    @keyframes run { from { stroke-dashoffset: 120; } to { stroke-dashoffset: -680; } }
+    .pulse { animation: pulse 1.8s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+  </style>
+  <defs>
+    <filter id="g" x="-20%" y="-300%" width="140%" height="700%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <line x1="40" y1="12" x2="760" y2="12" stroke="#7A0000" stroke-width="1.5"/>
+  <line class="run" x1="0" y1="12" x2="800" y2="12" stroke="#FF1E1E" stroke-width="2.5" filter="url(#g)" pathLength="800"/>
+  <path class="pulse" d="M10 12 L22 4 L34 12 L22 20 Z" fill="none" stroke="#FF1E1E" stroke-width="1.5" filter="url(#g)"/>
+  <path class="pulse" d="M766 12 L778 4 L790 12 L778 20 Z" fill="none" stroke="#FF1E1E" stroke-width="1.5" filter="url(#g)"/>
+</svg>
