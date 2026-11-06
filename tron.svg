@@ -1,17 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="800" height="250">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
   <style>
-    text { font-family: 'Orbitron', 'Segoe UI', 'Trebuchet MS', Arial, sans-serif; }
-    .spin  { transform-box: fill-box; transform-origin: center; animation: spin 6s linear infinite; }
-    .spinr { transform-box: fill-box; transform-origin: center; animation: spin 9s linear infinite reverse; }
+    text { font-family: 'Consolas', 'Courier New', monospace; }
+    .spin  { transform-box: fill-box; transform-origin: center; animation: spin 7s linear infinite; }
+    .spinr { transform-box: fill-box; transform-origin: center; animation: spin 10s linear infinite reverse; }
+    .spinf { transform-box: fill-box; transform-origin: center; animation: spin 4s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .pulse { animation: pulse 2.4s ease-in-out infinite; }
-    @keyframes pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+    .bob { animation: bob 3.4s ease-in-out infinite; }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+    .shadow { transform-box: fill-box; transform-origin: center; animation: shadow 3.4s ease-in-out infinite; }
+    @keyframes shadow { 0%, 100% { transform: scale(1); opacity: .4; } 50% { transform: scale(.78); opacity: .22; } }
+
+    .pulse { animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+    .blink { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
     .runner { stroke-dasharray: 90 910; animation: run 5s linear infinite; }
     @keyframes run { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -1000; } }
-    .trail { stroke-dasharray: 140 860; animation: trail 3s linear infinite; }
-    @keyframes trail { from { stroke-dashoffset: 140; } to { stroke-dashoffset: -860; } }
-    .cursor { animation: blink 1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
+
+    .streak { stroke-dasharray: 160 840; animation: streak 3.2s linear infinite; }
+    @keyframes streak { from { stroke-dashoffset: 160; } to { stroke-dashoffset: -840; } }
+
+    .hline { opacity: 0; animation: approach 4s cubic-bezier(.6,0,1,.6) infinite; }
+    @keyframes approach {
+      from { transform: translateY(0); opacity: 0; }
+      15%  { opacity: .8; }
+      to   { transform: translateY(100px); opacity: .9; }
+    }
+
+    .float { animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   </style>
 
   <defs>
@@ -19,58 +39,101 @@
       <feGaussianBlur stdDeviation="3" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#FF1E1E" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#FF1E1E" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#FF1E1E" stop-opacity=".28"/>
     </linearGradient>
-    <clipPath id="frame"><rect x="3" y="3" width="794" height="244" rx="14"/></clipPath>
+    <radialGradient id="aura" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#FF1E1E" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#FF1E1E" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect x="3" y="3" width="794" height="294" rx="14"/></clipPath>
   </defs>
 
   <!-- Fondo -->
-  <rect x="3" y="3" width="794" height="244" rx="14" fill="#050505"/>
+  <rect x="3" y="3" width="794" height="294" rx="14" fill="#050505"/>
 
   <g clip-path="url(#frame)">
-    <!-- Piso de rejilla -->
-    <rect x="0" y="165" width="800" height="85" fill="url(#floor)"/>
-    <g stroke="#FF1E1E" stroke-width="1" fill="none" opacity=".55">
-      <line x1="0" y1="165" x2="800" y2="165"/>
-      <line class="pulse" x1="0" y1="175" x2="800" y2="175"/>
-      <line class="pulse" x1="0" y1="189" x2="800" y2="189" style="animation-delay:.4s"/>
-      <line class="pulse" x1="0" y1="207" x2="800" y2="207" style="animation-delay:.8s"/>
-      <line class="pulse" x1="0" y1="230" x2="800" y2="230" style="animation-delay:1.2s"/>
-      <line x1="540" y1="165" x2="540" y2="250"/>
-      <line x1="540" y1="165" x2="400" y2="250"/>
-      <line x1="540" y1="165" x2="260" y2="250"/>
-      <line x1="540" y1="165" x2="100" y2="250"/>
-      <line x1="540" y1="165" x2="-60" y2="250"/>
-      <line x1="540" y1="165" x2="680" y2="250"/>
-      <line x1="540" y1="165" x2="820" y2="250"/>
-      <line x1="540" y1="165" x2="960" y2="250"/>
+    <circle class="pulse" cx="130" cy="118" r="120" fill="url(#aura)"/>
+
+    <!-- Piso en perspectiva -->
+    <rect x="0" y="200" width="800" height="100" fill="url(#floor)"/>
+    <g stroke="#FF1E1E" stroke-width="1" fill="none" opacity=".65">
+      <line x1="0" y1="200" x2="800" y2="200"/>
+      <line x1="400" y1="200" x2="-500" y2="300"/>
+      <line x1="400" y1="200" x2="-250" y2="300"/>
+      <line x1="400" y1="200" x2="0" y2="300"/>
+      <line x1="400" y1="200" x2="200" y2="300"/>
+      <line x1="400" y1="200" x2="400" y2="300"/>
+      <line x1="400" y1="200" x2="600" y2="300"/>
+      <line x1="400" y1="200" x2="800" y2="300"/>
+      <line x1="400" y1="200" x2="1050" y2="300"/>
+      <line x1="400" y1="200" x2="1300" y2="300"/>
     </g>
-    <!-- Rayo de luz sobre el piso -->
-    <line class="trail" x1="0" y1="207" x2="800" y2="207" stroke="#FFFFFF" stroke-width="3" filter="url(#glow)"/>
-    <line class="trail" x1="0" y1="207" x2="800" y2="207" stroke="#FF1E1E" stroke-width="6" opacity=".6" filter="url(#glow)" style="animation-delay:.1s"/>
+    <g stroke="#FF3B3B" stroke-width="1.2">
+      <line class="hline" x1="0" y1="200" x2="800" y2="200" style="animation-delay:0s"/>
+      <line class="hline" x1="0" y1="200" x2="800" y2="200" style="animation-delay:-.8s"/>
+      <line class="hline" x1="0" y1="200" x2="800" y2="200" style="animation-delay:-1.6s"/>
+      <line class="hline" x1="0" y1="200" x2="800" y2="200" style="animation-delay:-2.4s"/>
+      <line class="hline" x1="0" y1="200" x2="800" y2="200" style="animation-delay:-3.2s"/>
+    </g>
+    <line class="streak" x1="0" y1="262" x2="800" y2="262" stroke="#FF1E1E" stroke-width="7" opacity=".6" filter="url(#glow)" pathLength="1000"/>
+    <line class="streak" x1="0" y1="262" x2="800" y2="262" stroke="#FFFFFF" stroke-width="2.5" filter="url(#glow)" pathLength="1000"/>
+
+    <!-- Sombra del disco -->
+    <ellipse class="shadow" cx="130" cy="238" rx="64" ry="9" fill="#FF1E1E" filter="url(#soft)"/>
   </g>
 
-  <!-- Disco de identidad -->
-  <g filter="url(#glow)">
-    <g class="spin">
-      <circle cx="125" cy="115" r="72" fill="none" stroke="#FF1E1E" stroke-width="6" stroke-dasharray="150 40 60 40"/>
+  <!-- Disco de identidad (círculo normal) -->
+  <g class="bob">
+    <g filter="url(#glow)">
+      <g class="spin"><circle cx="130" cy="118" r="72" fill="none" stroke="#FF1E1E" stroke-width="7" stroke-dasharray="130 30 50 30 90 30"/></g>
+      <g class="spinr"><circle cx="130" cy="118" r="56" fill="none" stroke="#FF5A5A" stroke-width="3" stroke-dasharray="36 12"/></g>
+      <g class="spinf"><circle cx="130" cy="118" r="41" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="66 36"/></g>
+      <circle cx="130" cy="118" r="28" fill="#0a0000" stroke="#FF1E1E" stroke-width="2"/>
+      <circle class="pulse" cx="130" cy="118" r="13" fill="#FF1E1E"/>
+      <circle cx="130" cy="118" r="5" fill="#FFFFFF"/>
     </g>
-    <g class="spinr">
-      <circle cx="125" cy="115" r="50" fill="none" stroke="#FF5A5A" stroke-width="3" stroke-dasharray="40 14"/>
-    </g>
-    <circle cx="125" cy="115" r="30" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-    <circle class="pulse" cx="125" cy="115" r="14" fill="#FF1E1E"/>
   </g>
 
-  <!-- Texto -->
-  <text x="235" y="95" font-size="32" font-weight="900" fill="#FF2A2A" filter="url(#glow)" letter-spacing="2">LUIS MARIO SUAREZ</text>
-  <text x="236" y="128" font-size="15" font-weight="700" fill="#FFFFFF" letter-spacing="5">GREETINGS, USER.</text>
-  <text x="236" y="153" font-size="13" fill="#FF6B6B" letter-spacing="1.5">QA · DATA · JAVASCRIPT · NODE · NESTJS · PYTHON · SQL</text>
-  <rect class="cursor" x="236" y="141" width="0" height="0" fill="#FF1E1E"/>
+  <!-- Título extruido -->
+  <g font-size="28" font-weight="900" letter-spacing="3">
+    <text x="256" y="86" fill="#2a0000">LUIS MARIO SUAREZ</text>
+    <text x="255" y="85" fill="#4d0000">LUIS MARIO SUAREZ</text>
+    <text x="254" y="84" fill="#700000">LUIS MARIO SUAREZ</text>
+    <text x="253" y="83" fill="#930000">LUIS MARIO SUAREZ</text>
+    <text x="252" y="82" fill="#b80000">LUIS MARIO SUAREZ</text>
+    <text x="250" y="80" fill="#FF2A2A" filter="url(#glow)">LUIS MARIO SUAREZ</text>
+  </g>
+  <text x="251" y="112" font-size="15" font-weight="700" fill="#FFFFFF" letter-spacing="4">QA ENGINEER · DEV EN FORMACIÓN</text>
+
+  <!-- Etiquetas con relieve -->
+  <g font-size="12" font-weight="700" letter-spacing="1" text-anchor="middle">
+    <g class="float" style="animation-delay:0s"><rect x="254" y="153" width="102" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="250" y="149" width="102" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="301" y="166" fill="#FFFFFF">JAVASCRIPT</text></g>
+    <g class="float" style="animation-delay:.3s"><rect x="366" y="153" width="77" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="362" y="149" width="77" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="400.5" y="166" fill="#FFFFFF">NODE.JS</text></g>
+    <g class="float" style="animation-delay:.6s"><rect x="453" y="153" width="69" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="449" y="149" width="69" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="483.5" y="166" fill="#FFFFFF">NESTJS</text></g>
+    <g class="float" style="animation-delay:.9s"><rect x="532" y="153" width="69" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="528" y="149" width="69" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="562.5" y="166" fill="#FFFFFF">PYTHON</text></g>
+    <g class="float" style="animation-delay:1.2s"><rect x="611" y="153" width="45" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="607" y="149" width="45" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="629.5" y="166" fill="#FFFFFF">SQL</text></g>
+    <g class="float" style="animation-delay:1.5s"><rect x="666" y="153" width="77" height="26" rx="3" fill="#3a0000" stroke="#7a0000"/><rect x="662" y="149" width="77" height="26" rx="3" fill="#140000" stroke="#FF1E1E" stroke-width="1.5" filter="url(#soft)"/><text x="700.5" y="166" fill="#FFFFFF">PYSPARK</text></g>
+  </g>
+
+  <!-- Estado -->
+  <circle class="blink" cx="640" cy="34" r="4" fill="#FF1E1E" filter="url(#soft)"/>
+  <text x="652" y="38" font-size="11" fill="#FF6B6B" letter-spacing="2">SYSTEM ONLINE</text>
+
+  <!-- Esquinas HUD -->
+  <g stroke="#FF1E1E" stroke-width="2" fill="none" filter="url(#soft)">
+    <path d="M14 36 V14 H36"/>
+    <path d="M764 14 H786 V36"/>
+    <path d="M14 264 V286 H36"/>
+    <path d="M786 264 V286 H764"/>
+  </g>
 
   <!-- Borde con destello -->
-  <rect x="3" y="3" width="794" height="244" rx="14" fill="none" stroke="#FF1E1E" stroke-width="2" opacity=".7" filter="url(#glow)"/>
-  <rect class="runner" x="3" y="3" width="794" height="244" rx="14" fill="none" stroke="#FFFFFF" stroke-width="3" pathLength="1000" filter="url(#glow)"/>
+  <rect x="3" y="3" width="794" height="294" rx="14" fill="none" stroke="#FF1E1E" stroke-width="2" opacity=".7" filter="url(#glow)"/>
+  <rect class="runner" x="3" y="3" width="794" height="294" rx="14" fill="none" stroke="#FFFFFF" stroke-width="3" pathLength="1000" filter="url(#glow)"/>
 </svg>
