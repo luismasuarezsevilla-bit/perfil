@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="800" height="250">
+  <style>
+    text { font-family: 'Orbitron', 'Segoe UI', 'Trebuchet MS', Arial, sans-serif; }
+    .spin  { transform-box: fill-box; transform-origin: center; animation: spin 6s linear infinite; }
+    .spinr { transform-box: fill-box; transform-origin: center; animation: spin 9s linear infinite reverse; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .pulse { animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+    .runner { stroke-dasharray: 90 910; animation: run 5s linear infinite; }
+    @keyframes run { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -1000; } }
+    .trail { stroke-dasharray: 140 860; animation: trail 3s linear infinite; }
+    @keyframes trail { from { stroke-dashoffset: 140; } to { stroke-dashoffset: -860; } }
+    .cursor { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF1E1E" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FF1E1E" stop-opacity=".18"/>
+    </linearGradient>
+    <clipPath id="frame"><rect x="3" y="3" width="794" height="244" rx="14"/></clipPath>
+  </defs>
+
+  <!-- Fondo -->
+  <rect x="3" y="3" width="794" height="244" rx="14" fill="#050505"/>
+
+  <g clip-path="url(#frame)">
+    <!-- Piso de rejilla -->
+    <rect x="0" y="165" width="800" height="85" fill="url(#floor)"/>
+    <g stroke="#FF1E1E" stroke-width="1" fill="none" opacity=".55">
+      <line x1="0" y1="165" x2="800" y2="165"/>
+      <line class="pulse" x1="0" y1="175" x2="800" y2="175"/>
+      <line class="pulse" x1="0" y1="189" x2="800" y2="189" style="animation-delay:.4s"/>
+      <line class="pulse" x1="0" y1="207" x2="800" y2="207" style="animation-delay:.8s"/>
+      <line class="pulse" x1="0" y1="230" x2="800" y2="230" style="animation-delay:1.2s"/>
+      <line x1="540" y1="165" x2="540" y2="250"/>
+      <line x1="540" y1="165" x2="400" y2="250"/>
+      <line x1="540" y1="165" x2="260" y2="250"/>
+      <line x1="540" y1="165" x2="100" y2="250"/>
+      <line x1="540" y1="165" x2="-60" y2="250"/>
+      <line x1="540" y1="165" x2="680" y2="250"/>
+      <line x1="540" y1="165" x2="820" y2="250"/>
+      <line x1="540" y1="165" x2="960" y2="250"/>
+    </g>
+    <!-- Rayo de luz sobre el piso -->
+    <line class="trail" x1="0" y1="207" x2="800" y2="207" stroke="#FFFFFF" stroke-width="3" filter="url(#glow)"/>
+    <line class="trail" x1="0" y1="207" x2="800" y2="207" stroke="#FF1E1E" stroke-width="6" opacity=".6" filter="url(#glow)" style="animation-delay:.1s"/>
+  </g>
+
+  <!-- Disco de identidad -->
+  <g filter="url(#glow)">
+    <g class="spin">
+      <circle cx="125" cy="115" r="72" fill="none" stroke="#FF1E1E" stroke-width="6" stroke-dasharray="150 40 60 40"/>
+    </g>
+    <g class="spinr">
+      <circle cx="125" cy="115" r="50" fill="none" stroke="#FF5A5A" stroke-width="3" stroke-dasharray="40 14"/>
+    </g>
+    <circle cx="125" cy="115" r="30" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+    <circle class="pulse" cx="125" cy="115" r="14" fill="#FF1E1E"/>
+  </g>
+
+  <!-- Texto -->
+  <text x="235" y="95" font-size="32" font-weight="900" fill="#FF2A2A" filter="url(#glow)" letter-spacing="2">LUIS MARIO SUAREZ</text>
+  <text x="236" y="128" font-size="15" font-weight="700" fill="#FFFFFF" letter-spacing="5">GREETINGS, USER.</text>
+  <text x="236" y="153" font-size="13" fill="#FF6B6B" letter-spacing="1.5">QA · DATA · JAVASCRIPT · NODE · NESTJS · PYTHON · SQL</text>
+  <rect class="cursor" x="236" y="141" width="0" height="0" fill="#FF1E1E"/>
+
+  <!-- Borde con destello -->
+  <rect x="3" y="3" width="794" height="244" rx="14" fill="none" stroke="#FF1E1E" stroke-width="2" opacity=".7" filter="url(#glow)"/>
+  <rect class="runner" x="3" y="3" width="794" height="244" rx="14" fill="none" stroke="#FFFFFF" stroke-width="3" pathLength="1000" filter="url(#glow)"/>
+</svg>
